@@ -1,0 +1,22 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Main</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+    <div>
+        <form action="#" th:action="@{/main}" th:object="${controllerResponse}" method="post">
+            <label for="countries_selected">Select country:</label>
+            <select id="countries_selected" name="countries_selected"  th:field="*{country}">
+                <option name="country" th:each="country : ${allCountries}" th:value="${country}" th:text="${country}"></option>
+            </select>
+            <br>
+            <label for="day">Select day:</label>
+            <input type="date" id="day" name="day" min="2020-06-01" max="2022-05-02" th:field="*{date}">
+            <input type="submit" name="search" id="search" class="form-submit" value="Submit">
+        </form>
+    </div>
+    <script src="main.js"></script>
+</body>
+</html>

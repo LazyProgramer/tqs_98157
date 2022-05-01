@@ -1,0 +1,40 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Response</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+    <div>
+        <h1 th:text="${covid_info.country}"></h1>
+        <h2 name="date" th:text="${covid_info.day}"></h2>
+        <h2>Population:
+            <small th:inline="text">[[${covid_info.population}]]</small>
+        </h2>
+
+        <h2>Cases:</h2>
+        <ul>
+            <li th:inline="text">New cases: [[${covid_info.cases.new_cases}]]</li>
+            <li th:inline="text">Active cases: [[${covid_info.cases.active}]]</li>
+            <li th:inline="text">Critical cases: [[${covid_info.cases.critical}]]</li>
+            <li th:inline="text">Recovered cases: [[${covid_info.cases.recovered}]]</li>
+            <li th:inline="text">Cases by 1M: [[${covid_info.cases.Pop_by_1M}]]</li>
+            <li th:inline="text">Total cases: [[${covid_info.cases.total}]]</li>
+        </ul>
+
+        <h2>Deaths:</h2>
+        <ul>
+            <li th:inline="text">New cases: [[${covid_info.deaths.new_cases}]]</li>
+            <li th:inline="text">Cases by 1M: [[${covid_info.deaths.Pop_by_1M}]]</li>
+            <li th:inline="text">Total: [[${covid_info.deaths.total}]]</li>
+        </ul>
+
+        <h2>Tests:</h2>
+        <ul>
+            <li th:inline="text">Cases by 1M: [[${covid_info.tests.Pop_by_1M}]]</li>
+            <li th:inline="text">Total: [[${covid_info.tests.total}]]</li>
+        </ul>
+    </div>
+
+</body>
+</html>
