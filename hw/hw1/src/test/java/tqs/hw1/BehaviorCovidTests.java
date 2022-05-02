@@ -39,8 +39,8 @@ public class BehaviorCovidTests {
     @Then("I should be shown {string} covid info from day {string}")
     public void iShouldBeShownPage(String country, String day) {
         try {
-            String countryResponse = webDriver.findElement( By.cssSelector("h1")).getText();
-            assertTrue(country.contains(country));
+            String countryResponse = webDriver.findElement( By.name("country")).getText();
+            assertTrue(countryResponse.contains(country));
             String dateResponse = webDriver.findElement( By.name("date")).getText();
             assertTrue(dateResponse.contains(day));
 

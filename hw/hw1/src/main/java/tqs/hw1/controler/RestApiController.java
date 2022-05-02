@@ -14,23 +14,16 @@ public class RestApiController {
     @Autowired
     private CovidService covidService;
 
-    @CrossOrigin
     @GetMapping("/allCountries")
     public List<String> getAllCountries(){
-
-        List<String> allCountries = covidService.getAllContries();
-
-        return allCountries;
+        return covidService.getAllContries();
     }
 
-    @CrossOrigin
     @GetMapping("/data/{country}/{day}")
     public CovidResponse getCountrysCovidInfo(
             @PathVariable(required = true, name = "country") String country,
-            @PathVariable(required = true, name = "day") String day){
+            @PathVariable(required = true, name = "day") String day) {
 
-        CovidResponse covidResponse = covidService.getCovidInfoFromCountry(country, day);
-
-        return covidResponse;
+        return covidService.getCovidInfoFromCountry(country, day);
     }
 }

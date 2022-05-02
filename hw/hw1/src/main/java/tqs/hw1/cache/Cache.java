@@ -2,31 +2,30 @@ package tqs.hw1.cache;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 public class Cache{
-    private Map storage;
+    private final Map<String, Object> storage;
 
     public Cache(){
-        storage = new HashMap();
+        storage = new HashMap<String, Object>();
     }
 
     public void addNewItem(String key, Object response){
         if (storage.size()>=20){
-            storage.remove(storage.keySet().stream().findFirst().get());
+            Optional<String> cacheObject = storage.keySet().stream().findFirst();
+            cacheObject.ifPresent(storage::remove);
         }
         storage.put(key, response);
     }
 
     public boolean checkIfHasResponse(String key){
-        if (storage.keySet().contains(key)){
-            return true;
-        }
-        else {
-            return false;
-        }
+        return storage.containsKey(key);
     }
 
     public Object getItem(String key){
         return storage.get(key);
     }
+
+    public int size() {return storage.size();}
 }

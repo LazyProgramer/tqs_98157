@@ -9,13 +9,11 @@ public class CovidDeaths {
     private String Pop_by_1M;
     private long total;
 
+    /*
+    // Used for gson conversion
+     */
     public CovidDeaths(){}
 
-    public CovidDeaths(String new_cases, String pop_by_1M, long total) {
-        this.new_cases = new_cases;
-        Pop_by_1M = pop_by_1M;
-        this.total = total;
-    }
 
     public void setNew_cases(String new_cases) {
         this.new_cases = new_cases;

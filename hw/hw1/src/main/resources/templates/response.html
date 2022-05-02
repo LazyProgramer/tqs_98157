@@ -6,7 +6,7 @@
 </head>
 <body>
     <div>
-        <h1 th:text="${covid_info.country}"></h1>
+        <h1 name="country" th:text="${covid_info.country}"></h1>
         <h2 name="date" th:text="${covid_info.day}"></h2>
         <h2>Population:
             <small th:inline="text">[[${covid_info.population}]]</small>
@@ -31,7 +31,7 @@
 
         <h2>Tests:</h2>
         <ul>
-            <li th:inline="text">Cases by 1M: [[${covid_info.tests.Pop_by_1M}]]</li>
+            <li th:inline="text">Cases by 1M: [[${covid_info.tests.PopBy1M}]]</li>
             <li th:inline="text">Total: [[${covid_info.tests.total}]]</li>
         </ul>
     </div>

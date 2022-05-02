@@ -1,7 +1,5 @@
 package tqs.hw1.entities;
 
-import java.time.LocalDate;
-
 public class ControllerResponse {
     String country;
     String date;

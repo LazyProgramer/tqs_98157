@@ -2,6 +2,8 @@ package tqs.hw1.controler;
 
 import java.util.*;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,9 +14,11 @@ import tqs.hw1.entities.CovidResponse;
 
 @RequestMapping("")
 @Controller
-public class MainController {
+public class MainController extends RestApiController {
 
     private final WebClient apiClient;
+
+    Logger logger = LoggerFactory.getLogger(MainController.class);
 
     @Autowired
     public MainController(){
@@ -29,6 +33,7 @@ public class MainController {
                 .exchangeToMono(clientResponse -> clientResponse.bodyToMono(List.class))
                 .block();
 
+        assert allCountries != null;
         model.addAllAttributes(Map.of(
                 "allCountries", allCountries,
                 "controllerResponse", new ControllerResponse()
@@ -38,9 +43,12 @@ public class MainController {
 
     @PostMapping("/main")
     public String search(@ModelAttribute ControllerResponse controllerResponse){
-        if(controllerResponse.getCountry() == null || controllerResponse.getDate()==null){
+        logger.info("Get response from " + controllerResponse.getCountry() + " in " + controllerResponse.getDate());
+
+        if(controllerResponse.getDate().isEmpty()){
             return "redirect:/main";
         }
+
 
         return "redirect:/response&country="+controllerResponse.getCountry()+"&day="+controllerResponse.getDate();
     }
@@ -53,7 +61,10 @@ public class MainController {
                 .exchangeToMono(clientResponse -> clientResponse.bodyToMono(CovidResponse.class))
                 .block();
 
+        logger.info("Response:" + covid_info);
+
         if(covid_info == null){
+
             List<String> allCountries = apiClient.get()
                     .uri("api/allCountries")
                     .exchangeToMono(clientResponse -> clientResponse.bodyToMono(List.class))
@@ -63,8 +74,8 @@ public class MainController {
                     "allCountries", allCountries,
                     "controllerResponse", new ControllerResponse()
             ));
-            
-            return "main";
+
+            return "redirect:/main";
         }
         else {
 

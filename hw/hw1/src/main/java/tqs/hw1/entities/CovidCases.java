@@ -13,16 +13,10 @@ public class CovidCases {
     private String Pop_by_1M;
     private long total;
 
+    /*
+    // Used for gson conversion
+     */
     public CovidCases(){}
-
-    public CovidCases(String new_cases, long active, long critical, long recovered, String pop_by_1M, long total) {
-        this.new_cases = new_cases;
-        this.active = active;
-        this.critical = critical;
-        this.recovered = recovered;
-        this.Pop_by_1M = pop_by_1M;
-        this.total = total;
-    }
 
     public String getNew_cases() {
         return new_cases;

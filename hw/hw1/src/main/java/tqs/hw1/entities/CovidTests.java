@@ -1,26 +1,23 @@
 package tqs.hw1.entities;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.gson.annotations.SerializedName;
 
 public class CovidTests {
     @SerializedName("1M_pop")
-    private String Pop_by_1M;
+    private String popBy1M;
     private long total;
 
+    /*
+    // Used for gson conversion
+     */
     public CovidTests(){}
 
-    public CovidTests(String pop_by_1M, long total) {
-        Pop_by_1M = pop_by_1M;
-        this.total = total;
+    public String getPopBy1M() {
+        return this.popBy1M;
     }
 
-    public String getPop_by_1M() {
-        return Pop_by_1M;
-    }
-
-    public void setPop_by_1M(String pop_by_1M) {
-        Pop_by_1M = pop_by_1M;
+    public void setPopBy1M(String popBy1M) {
+        this.popBy1M = popBy1M;
     }
 
     public long getTotal() {
@@ -34,7 +31,7 @@ public class CovidTests {
     @Override
     public String toString() {
         return "CovidTests{" +
-                "Pop_by_1M='" + Pop_by_1M + '\'' +
+                "Pop_by_1M='" + popBy1M + '\'' +
                 ", total=" + total +
                 '}';
     }

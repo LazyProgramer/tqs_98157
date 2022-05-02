@@ -1,6 +1,8 @@
 package tqs.hw1.entities;
 
-public class CovidResponse {
+import tqs.hw1.controler.RestApiController;
+
+public class CovidResponse extends RestApiController {
 
     private String country;
     private long population;
@@ -9,16 +11,10 @@ public class CovidResponse {
     private CovidTests tests;
     private String day;
 
+    /*
+    // Used for gson conversion
+     */
     public CovidResponse(){}
-
-    public CovidResponse(String country, long population, CovidCases cases, CovidDeaths deaths, CovidTests tests, String day) {
-        this.country = country;
-        this.population = population;
-        this.cases = cases;
-        this.deaths = deaths;
-        this.tests = tests;
-        this.day = day;
-    }
 
     public String getCountry() {
         return country;

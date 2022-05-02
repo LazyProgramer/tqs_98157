@@ -18,7 +18,7 @@ import java.util.List;
 @Service
 public class CovidService {
 
-    private Cache storage = new Cache();
+    private final Cache storage = new Cache();
 
     Logger logger = LoggerFactory.getLogger(CovidService.class);
 
@@ -80,21 +80,26 @@ public class CovidService {
 
             JsonArray response = full_json_response.getAsJsonArray("response");
 
+            logger.info("Response from external API:"+String.valueOf(response));
             if(response == null || response.size() == 0){
+                logger.warn("Response was empty");
                 return null;
             }
 
             String allInfo = gson.toJson(response.get(response.size()-1).getAsJsonObject());
 
-            allInfo = allInfo.replaceAll("null", "+0");
+            allInfo = allInfo.replace("null", "+0");
 
 
             CovidResponse covidResponse = gson.fromJson(allInfo, CovidResponse.class);
+            logger.info("Service response:"+String.valueOf(covidResponse));
 
             storage.addNewItem(cache_key, covidResponse);
 
             return covidResponse;
         }
-        else return null;
+        else {
+            return null;
+        }
     }
 }

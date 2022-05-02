@@ -10,7 +10,7 @@ import tqs.hw1.entities.CovidResponse;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @ExtendWith(MockitoExtension.class)
-public class CacheTests {
+class CacheTests {
 
     private Cache covidCache;
 
@@ -18,15 +18,25 @@ public class CacheTests {
     public void setUp(){covidCache = new Cache();}
 
     @Test
-    public void whenValidRequestMade_ReturnCorrectResult(){
+    void whenValidRequestMade_ReturnCorrectResult(){
         covidCache.addNewItem("Portugal-2020-06-06", "Expected response");
         String cacheResponse = (String) covidCache.getItem("Portugal-2020-06-06");
         assertThat(cacheResponse).isEqualTo("Expected response");
     }
 
     @Test
-    public void whenInvalidRequestMade_ReturnNoResult(){
+    void whenInvalidRequestMade_ReturnNoResult(){
         CovidResponse cacheResponse = (CovidResponse) covidCache.getItem("Portugal-2020-06-06");
-        assertThat(cacheResponse).isEqualTo(null);
+        assertThat(cacheResponse).isNull();
+    }
+
+    @Test
+    void whenFull_RemoveOldestItem(){
+        int i = 1;
+        while (i<=21) {
+            covidCache.addNewItem("Portugal-2020-06-0" + String.valueOf(i), i);
+            i = i + 1;
+        }
+        assertThat(covidCache.size()).isEqualTo(20);
     }
 }
